@@ -21,12 +21,33 @@
       
       
         Moengage = moe({
-        app_id:"07B43ZOY0R3I355224425RPZ",
-        debug_logs: 1,
+        app_id:"HYH9YCFRJAA3ZDC91AN8TRP1",
+        debug_logs: 0,
         swPath: "/mysite/sw.js",
         disable_onsite: true
         });
-        </script>  
+        
+        
+        </script> 
+    <script>
+     Moengage.onsite.registerCallback("consent management", function (err, data) {
+    if (err) {
+    // Handle error case here
+    // We could get error for various reasons, like
+    // network issues, campaigns not present for a particular tag
+    return console.error('Error from moengage:', err);
+    }
+    console.log('Data for campaign:', data);
+    
+    var payload = data.payload; // Campaign payload defined during campaign creation
+    console.log(data.payload);
+         
+    var impTracker = data.imp; // Function, you can call impTracker() to send impression stats for a campaign back to MoEngage. Call this after you have successfully rendered the HTML as per the payload provided.
+    
+    var clickTracker = data.click({widget_id:"sample_widget_id"}); // Function, you can call clickTracker() to send click stats for a campaign back to MoEngage. Call this when the user clicks on the desired section of the website. Passing widget_id is not mandatory and should only be used in case you want to differentiate the clicks between 2 different widgets of the Web Personalization Campaign.
+    });
+    </script>
+    
 </head>
 <!-- Our Body tag starts here -->
 <body>
